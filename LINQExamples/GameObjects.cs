@@ -12,20 +12,24 @@ namespace LINQExamples
         {
             new Player { playerId = Guid.NewGuid().ToString(),
                                          firstName = "Paul",
+                                         sceondName = "Powell",
                                           GamerTag = "Post Dark",
                                              XP = 1000},
 
             new Player { playerId = Guid.NewGuid().ToString(),
                                          firstName = "Fred",
+                                         sceondName = "Flinstone",
                                           GamerTag = "Twinny",
                                              XP = 100},
 
             new Player { playerId = Guid.NewGuid().ToString(),
-                                         firstName = "Fred",
+                                         firstName = "Margaret",
+                                         sceondName = "Muldooney",
                                           GamerTag = "Twinny",
                                              XP = 600},
             new Player { playerId = Guid.NewGuid().ToString(),
                                          firstName = "Bill",
+                                         sceondName = "Bloggs",
                                           GamerTag = "Mahindy",
                                              XP = 250},
     };
@@ -102,6 +106,7 @@ namespace LINQExamples
         public int XP { get; set; }
         public string GamerTag { get; set; }
         public string firstName { get; set; }
+        public string sceondName { get; set; }
 
         public override string ToString()
         {
