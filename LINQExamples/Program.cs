@@ -10,29 +10,15 @@ namespace LINQExamples
     {
         static void Main(string[] args)
         {
-            GameData game = new GameData
-            {
-                GameID = Guid.NewGuid().ToString(),
-                GameName = "Gear Up"
-            };
+            GameObjects _gobjs = new GameObjects();
+            
+            foreach (var game in _gobjs.games)
+                Console.WriteLine("Game is {0} ", game.ToString());
+            foreach (var player in _gobjs.players)
+                Console.WriteLine("Player is {0}", player.ToString());
+            foreach (var score in _gobjs.scores)
+                Console.WriteLine("Score is {0}", score.ToString());
 
-            Player player = new Player { playerId = Guid.NewGuid().ToString(),
-                                         firstName = "Paul",
-                                          GamerTag = "Post Dark",
-                                             XP = 1000};
-
-            GameScore score =
-                        new GameScore
-                        {
-                            ScoreID = Guid.NewGuid().ToString(),
-                            PlayerID = player.playerId,
-                            GameID = game.GameID,
-                            score = 600
-                        };
-
-            Console.WriteLine("Game is {0} ", game.ToString());
-            Console.WriteLine("Player is {0}", player.ToString());
-            Console.WriteLine("Score is {0}", score.ToString());
             Console.ReadKey();
         }
     }

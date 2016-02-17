@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace LINQExamples
 {
-    class GameObjects
+    public class GameObjects
     {
-        List<Player> players = new List<Player>
+        public List<Player> players = new List<Player>
         {
             new Player { playerId = Guid.NewGuid().ToString(),
                                          firstName = "Paul",
@@ -18,22 +18,57 @@ namespace LINQExamples
             new Player { playerId = Guid.NewGuid().ToString(),
                                          firstName = "Fred",
                                           GamerTag = "Twinny",
+                                             XP = 100},
+
+            new Player { playerId = Guid.NewGuid().ToString(),
+                                         firstName = "Fred",
+                                          GamerTag = "Twinny",
+                                             XP = 600},
+            new Player { playerId = Guid.NewGuid().ToString(),
+                                         firstName = "Bill",
+                                          GamerTag = "Mahindy",
                                              XP = 250},
     };
-        List<GameData> games = new List<GameData>
+        public List<GameData> games = new List<GameData>
         {
             new GameData
             {
                 GameID = Guid.NewGuid().ToString(),
                 GameName = "Gear Up"
+            },
+            new GameData
+            {
+                GameID = Guid.NewGuid().ToString(),
+                GameName = "Game on"
             }
         };
-        List<GameScore> scores = new List<GameScore>();
+        public List<GameScore> scores = new List<GameScore>();
         
 
             public GameObjects()
         {
             // Create the Game scores here as the Games and players will be created
+            Random _randomScore = new Random();
+
+            foreach (var g in games)
+            {
+                var randomPlayer = players
+                        .Select(p => new { p.playerId, gid = Guid.NewGuid() })
+                        .OrderBy(o => o.gid).Take(3).ToList();
+
+                foreach (var p in randomPlayer)
+                {
+                    scores.Add(new GameScore
+                    {
+                        ScoreID = Guid.NewGuid().ToString(),
+                        GameID = g.GameID,
+                        PlayerID = p.playerId,
+                        score = _randomScore.Next(5, 600)
+                    });
+                }
+
+            }
+
         }
     }
     public class GameData
@@ -43,7 +78,7 @@ namespace LINQExamples
 
         public override string ToString()
         {
-            return String.Concat("Game ID ", GameID, " Game Name ", GameName);
+            return String.Concat(" Game Name ", GameName);
         }
     }
 
@@ -57,7 +92,7 @@ namespace LINQExamples
         public override string ToString()
         {
             return String.Concat(new string[] 
-                            {"Score ", ScoreID," Game ID ", GameID," Player ID ",
+                            {" Game ID ", GameID," Player ID ",
                                 PlayerID, " Score ",score.ToString() });
         }
     }
@@ -71,7 +106,7 @@ namespace LINQExamples
         public override string ToString()
         {
             return String.Concat(new string[]
-                            {"PlayerID ", playerId," XP ", XP.ToString()," Gamer Tag ",
+                            {" XP ", XP.ToString()," Gamer Tag ",
                                 GamerTag, " first name ",firstName });
         }
     }
