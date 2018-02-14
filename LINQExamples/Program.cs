@@ -12,9 +12,16 @@ namespace LINQExamples
         {
             GameObjects _gobjs = new GameObjects();
 
-            var selected = _gobjs.Collectables.Where(s => s.selected == true);
+            var selected = _gobjs.Collectables
+                                 .Where(s => s.selected == true);
             foreach (var item in selected)
                 Console.WriteLine("Collected {0}", item.ToString());
+
+            var orderedSelected = _gobjs.Collectables
+                                        .Where(s => s.selected == true)
+                                        .OrderBy(s => s.val);
+            foreach (var item in orderedSelected)
+                Console.WriteLine("Ordered Collected {0}", item.ToString());
 
             var _playerXPDetails = _gobjs.players
                 .Select(p => new {
