@@ -8,6 +8,17 @@ namespace LINQExamples
 {
     public class GameObjects
     {
+        public static Random r = new Random();
+
+        public List<Collectable> Collectables = new List<Collectable>()
+        {
+            new Collectable { id= Guid.NewGuid().ToString(), selected = (r.Next(0,2)==1?true:false), val = 100},
+              new Collectable { id= Guid.NewGuid().ToString(), selected = (r.Next(0,2)==1?true:false), val = r.Next(100,200)},
+                new Collectable { id= Guid.NewGuid().ToString(), selected = (r.Next(0,2)==1?true:false), val = 300},
+                  new Collectable { id= Guid.NewGuid().ToString(), selected = (r.Next(0,2)==1?true:false), val = r.Next(100,200)},
+                    new Collectable { id= Guid.NewGuid().ToString(), selected = (r.Next(0,2)==1?true:false), val = r.Next(100,200)},
+        };
+
         public List<Player> players = new List<Player>
         {
             new Player { playerId = Guid.NewGuid().ToString(),
@@ -115,5 +126,19 @@ namespace LINQExamples
                                 GamerTag, " first name ",firstName });
         }
     }
+
+    public class Collectable
+    {
+        public string id;
+        public bool selected;
+        public int val;
+        public override string ToString()
+        {
+            return String.Concat(new string[]
+                            {" ID ", id.ToString()," Value ",
+                                val.ToString(), " first name ", (selected? "Selected":"Not Selected")});
+        }
+    }
+
 
 }

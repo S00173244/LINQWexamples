@@ -12,6 +12,10 @@ namespace LINQExamples
         {
             GameObjects _gobjs = new GameObjects();
 
+            var selected = _gobjs.Collectables.Where(s => s.selected == true);
+            foreach (var item in selected)
+                Console.WriteLine("Collected {0}", item.ToString());
+
             var _playerXPDetails = _gobjs.players
                 .Select(p => new {
                                     Name = String.Concat(p.firstName, " ", p.sceondName),
@@ -31,7 +35,7 @@ namespace LINQExamples
                                             Name = String.Concat(p.firstName, " ", p.sceondName),
                                              PlayerScore = s.score});
             foreach (var item in playerScores)
-                Console.WriteLine("Player Score for {0}", String.Concat("Game name ", item.Game,item.Name," score ", item.PlayerScore.ToString())  );
+                Console.WriteLine("Player Score for {0} ", String.Concat("Game name ", item.Game," ",item.Name," score ", item.PlayerScore.ToString())  );
             
             //foreach (var game in _gobjs.games)
             //    Console.WriteLine("Game is {0} ", game.ToString());
